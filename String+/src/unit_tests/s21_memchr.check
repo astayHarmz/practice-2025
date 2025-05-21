@@ -1,0 +1,139 @@
+#suite s21_memchr_test
+
+#test s21_memchr_test1
+char* str = "aboba";
+int symb = 'a';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 5);
+ptr2 = s21_memchr(str, symb, 5);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test2
+char* str = "aboba";
+int symb = 'o';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 5);
+ptr2 = s21_memchr(str, symb, 5);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test3
+char* str = "abobus";
+int symb = 's';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 7);
+ptr2 = s21_memchr(str, symb, 7);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test4
+char* str = "abobus";
+int symb = 'n';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 7);
+ptr2 = s21_memchr(str, symb, 7);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test5
+char* str = "";
+int symb = 'n';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 1);
+ptr2 = s21_memchr(str, symb, 1);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test6
+char* str = "l";
+int symb = 'l';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 1);
+ptr2 = s21_memchr(str, symb, 1);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test7
+char* str = "a";
+int symb = 'l';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 1);
+ptr2 = s21_memchr(str, symb, 1);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test8
+char* str = "";
+int symb = '\0';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 0);
+ptr2 = s21_memchr(str, symb, 0);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test9
+char* str = "";
+int symb = '\0';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 5);
+ptr2 = s21_memchr(str, symb, 5);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test10
+char* str = "wawawa";
+int symb = '\0';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 6);
+ptr2 = s21_memchr(str, symb, 6);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test11
+char* str = "wawawa";
+int symb = '\0';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 7);
+ptr2 = s21_memchr(str, symb, 7);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test12
+char* str = "waw\tawa";
+int symb = '\t';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 7);
+ptr2 = s21_memchr(str, symb, 7);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test13
+char* str = "wawawa";
+int symb = '\t';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 6);
+ptr2 = s21_memchr(str, symb, 6);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test14
+char* str = "wawawa";
+int symb = '\n';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 6);
+ptr2 = s21_memchr(str, symb, 6);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test15
+char* str = "waw\nawa";
+int symb = '\n';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 6);
+ptr2 = s21_memchr(str, symb, 6);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test16
+char* str = "stroka";
+int symb = 'a';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 4);
+ptr2 = s21_memchr(str, symb, 4);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+#test s21_memchr_test17
+char* str = "stroka";
+int symb = 'l';
+void* ptr1, *ptr2;
+ptr1 = memchr(str, symb, 7);
+ptr2 = s21_memchr(str, symb, 7);
+ck_assert_ptr_eq(ptr1, ptr2);
+
+

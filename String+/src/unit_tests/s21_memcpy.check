@@ -1,0 +1,33 @@
+#suite s21_memcpy_test
+
+#test s21_memcpy_test1
+char src[50] = "Hello, world!";
+char dest1[50];
+char dest2[50];
+memcpy(dest1, src, strlen(src) + 1);
+s21_memcpy(dest2, src, strlen(src) + 1);
+ck_assert_str_eq(dest1, dest2);
+
+#test s21_memcpy_test2
+char src[50] = "Partial copy test";
+char dest1[50] = {0};
+char dest2[50] = {0};
+memcpy(dest1, src, 7);
+s21_memcpy(dest2, src, 7);
+ck_assert(memcmp(dest1, dest2, 7) == 0);
+
+#test s21_memcpy_test3
+char src[50] = "Zero size copy test";
+char dest1[50] = {0};
+char dest2[50] = {0};
+memcpy(dest1, src, 0);
+s21_memcpy(dest2, src, 0);
+ck_assert(memcmp(dest1, dest2, 50) == 0);
+
+#test s21_memcpy_test4
+char src[50] = "";
+char dest1[50] = {0};
+char dest2[50] = {0};
+memcpy(dest1, src, 1);
+s21_memcpy(dest2, src, 1);
+ck_assert(memcmp(dest1, dest2, 50) == 0);

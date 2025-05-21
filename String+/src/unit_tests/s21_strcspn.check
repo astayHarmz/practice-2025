@@ -1,0 +1,57 @@
+#suite s21_strcspn_test
+
+#test s21_strcspn_test1
+char str1[] = "Hello, world!";
+char str2[] = "xyz";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test2
+char str1[] = "Hello, world!";
+char str2[] = "o";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test3
+char str1[] = "Hello, world!";
+char str2[] = "H";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test4
+char str1[] = "Hello, world!";
+char str2[] = "!";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test5
+char str1[] = "Hello, world!";
+char str2[] = "ol";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test6
+char str1[] = "";
+char str2[] = "abc";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test7
+char str1[] = "";
+char str2[] = "";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strcspn_test8
+char str1[] = "";
+char str2[] = "";
+s21_size_t expected = strcspn(str1, str2);
+s21_size_t result = s21_strcspn(str1, str2);
+ck_assert(expected == result);

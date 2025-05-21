@@ -1,0 +1,43 @@
+#suite s21_strncat_test
+
+#test s21_strcat_test1
+char result[20] = "Abobussy";
+char expected[20] = "Abobussy";
+const char *src = "wawawawa";
+s21_strncat(result, src, 5);
+strncat(expected, src, 5);
+ck_assert_str_eq(result, expected);
+
+#test s21_strcat_test2
+char result[20] = "";
+char expected[20] = "";
+const char *src = "wawawawa";
+s21_strncat(result, src, 5);
+strncat(expected, src, 5);
+ck_assert_str_eq(result, expected);
+
+#test s21_strcat_test3
+char result[20] = "";
+char expected[20] = "";
+const char *src = "wawawawa";
+s21_strncat(result, src, 0);
+strncat(expected, src, 0);
+ck_assert_str_eq(result, expected);
+
+#test s21_strcat_test4
+char result[20] = "";
+char expected[20] = "";
+const char *src = "wawawawa";
+s21_strncat(result, src, 0);
+strncat(expected, src, 0);
+ck_assert_str_eq(result, expected);
+
+#test s21_strcat_test5
+char result[20] = "";
+char expected[20] = "";
+const char *src = "wa";
+s21_strncat(result, src, 5);
+strncat(expected, src, 5);
+ck_assert_str_eq(result, expected);
+
+

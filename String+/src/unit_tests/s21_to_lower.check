@@ -1,0 +1,37 @@
+#suite s21_to_lower_test
+
+#test s21_to_lower_test1
+char *result = s21_to_lower("HELLO, WORLD!");
+ck_assert_str_eq(result, "hello, world!");
+free(result);
+
+#test s21_to_lower_test2
+char *result = s21_to_lower("HeLLo, WoRLd!");
+ck_assert_str_eq(result, "hello, world!");
+free(result);
+
+#test s21_to_lower_test3
+ char *result = s21_to_lower("hello, world!");
+ck_assert_str_eq(result, "hello, world!");
+free(result);
+
+#test s21_to_lower_test4
+char *result = s21_to_lower("");
+ck_assert_str_eq(result, "");
+free(result);
+
+#test s21_to_lower_test5
+char *result = s21_to_lower("12345");
+ck_assert_str_eq(result, "12345");
+free(result);
+
+#test s21_to_lower_test6
+char *result = s21_to_lower("!@#$%^&*()");
+ck_assert_str_eq(result, "!@#$%^&*()");
+free(result);
+
+#test s21_to_lower_test7
+char *result = s21_to_lower(NULL);
+ck_assert_ptr_eq(result, NULL);
+
+

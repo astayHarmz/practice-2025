@@ -1,0 +1,23 @@
+#suite s21_strerror_test
+
+#if defined(__linux__)
+#define N 134
+#define ERRMSG "Unknown error"
+#endif
+#if defined(__APPLE_) || defined(__MACH__)
+#define N 107
+#define ERRMSG "Unknown error:"
+#endif
+
+#test s21_strerror_test1
+for (int i = -1; i < N; i++) {
+  char *result = s21_strerror(i);
+  char *expected = strerror(i);
+  ck_assert_pstr_eq(result, expected);
+}
+
+#test s21_strerror_test2
+char *result = s21_strerror(200);
+char *expected = strerror(200);
+ck_assert_pstr_eq(result, expected);
+free(expected);

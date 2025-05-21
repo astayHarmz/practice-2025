@@ -1,0 +1,23 @@
+#suite s21_memset_test
+
+#test s21_memset_test1
+char res1[] = "Hello";
+char res2[] = "Hello";
+int ch = '\0';
+int n = 6;
+ck_assert_str_eq(memset(res1, ch, n), s21_memset(res2, ch, n));
+
+#test s21_memset_test2
+char res1[] = "Hello";
+char res2[] = "Hello";
+int ch = ' ';
+int n = 5;
+ck_assert_str_eq(memset(res1, ch, n), s21_memset(res2, ch, n));
+
+#test s21_memset_test3
+char res1[] = "Hello";
+char res2[] = "Hello";
+int ch = ' ';
+int n = 3;
+ck_assert_str_eq(memset(res1, ch, n), s21_memset(res2, ch, n));
+

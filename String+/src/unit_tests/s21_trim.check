@@ -1,0 +1,36 @@
+#suite s21_trim_test
+
+#test s21_trim_test1
+char *result = s21_trim("  Hello, world!  ", " ");
+ck_assert_str_eq(result, "Hello, world!");
+free(result);
+
+#test s21_trim_test2
+char *result = s21_trim("  Hello, world!  ", "");
+ck_assert_str_eq(result, "  Hello, world!  ");
+free(result);
+
+#test s21_trim_test3
+char *result = s21_trim("", " ");
+ck_assert_str_eq(result, "");
+free(result);
+
+#test s21_trim_test4
+char *result = s21_trim("Hello, world!", " ");
+ck_assert_str_eq(result, "Hello, world!");
+free(result);
+
+#test s21_trim_test5
+char *result = s21_trim("aa--Hello--aa", "a-");
+ck_assert_str_eq(result, "Hello");
+free(result);
+
+#test s21_trim_test6
+char *result = s21_trim("aaaa", "a");
+ck_assert_str_eq(result, "");
+free(result);
+
+#test s21_trim_test7
+char *result = s21_trim(NULL, " ");
+ck_assert_ptr_eq(result, NULL);
+

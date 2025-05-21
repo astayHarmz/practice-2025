@@ -1,0 +1,113 @@
+#suite s21_strncmp_test
+
+#test s21_strncmp_test1
+const char *str1 = "Hello";
+const char *str2 = "Hello";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test2
+const char *str1 = "aboba";
+const char *str2 = "ababa";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test3
+const char *str1 = "Hell";
+const char *str2 = "Hello";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test4
+const char *str1 = "Hello";
+const char *str2 = "Hell";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test5
+const char *str1 = "Hello aboba";
+const char *str2 = "Hello haha";
+s21_size_t n = 6;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test6
+const char *str1 = "Hehe haha hehe";
+const char *str2 = "";
+s21_size_t n = 10;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test7
+const char *str1 = "";
+const char *str2 = "Hehe haha hehe";
+s21_size_t n = 10;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test8
+const char *str1 = "";
+const char *str2 = "";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test9
+const char *str1 = "a";
+const char *str2 = "a";
+s21_size_t n = 1;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test10
+const char *str1 = "a";
+const char *str2 = "n";
+s21_size_t n = 1;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test11
+const char *str1 = "Hello aboba";
+const char *str2 = "Hehe haha";
+s21_size_t n = 0;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test12
+const char *str1 = "Hehe haha hehe";
+const char *str2 = "Hehe";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test13
+const char *str1 = "Hehe haha hehe";
+const char *str2 = "Hehe";
+s21_size_t n = 3;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));
+
+#test s21_strncmp_test14
+const char *str1 = "";
+const char *str2 = "";
+s21_size_t n = 150000;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) || (!result && !expected));

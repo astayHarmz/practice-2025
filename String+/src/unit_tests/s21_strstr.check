@@ -1,0 +1,28 @@
+#suite s21_strstr_test
+
+#test s21_strstr_test1
+char *hs = "awawaw";
+char *ndl = "waw";
+ck_assert_ptr_eq(s21_strstr(hs, ndl), strstr(hs, ndl));
+
+#test s21_strstr_test2
+char *hs = "";
+char *ndl = "waw";
+ck_assert_ptr_eq(s21_strstr(hs, ndl), strstr(hs, ndl));
+
+#test s21_strstr_test3
+char *hs = "wawawa";
+char *ndl = "";
+ck_assert_ptr_eq(s21_strstr(hs, ndl), strstr(hs, ndl));
+
+#test s21_strstr_test4
+char *hs = "wawawa";
+char *ndl = "wawawawawawa";
+ck_assert_ptr_eq(s21_strstr(hs, ndl), strstr(hs, ndl));
+
+#test s21_strstr_test5
+char *hs = "";
+char *ndl = "";
+ck_assert_ptr_eq(s21_strstr(hs, ndl), strstr(hs, ndl));
+
+

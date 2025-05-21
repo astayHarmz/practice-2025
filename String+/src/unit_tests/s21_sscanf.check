@@ -1,0 +1,1744 @@
+#suite s21_scanf_test
+
+#test sscanf_c_test_1
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "";
+  char c1 = 0, c2 = 0;
+  int res1 = s21_sscanf(str, format, &c1);
+  int res2 = sscanf(str, format, &c2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+
+#test sscanf_c_test_2
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "%c";
+  char c1 = 0, c2 = 0;
+  int res1 = s21_sscanf(str, format, &c1);
+  int res2 = sscanf(str, format, &c2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+
+#test sscanf_c_test_3
+  char str[BUFF_SIZE] = " ";
+  char format[BUFF_SIZE] = "%c";
+  char c1 = 0, c2 = 0;
+  int res1 = s21_sscanf(str, format, &c1);
+  int res2 = sscanf(str, format, &c2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+
+#test sscanf_c_test_4
+  char str[BUFF_SIZE] = "z";
+  char format[BUFF_SIZE] = "%c";
+  char c1 = 0, c2 = 0;
+  int res1 = s21_sscanf(str, format, &c1);
+  int res2 = sscanf(str, format, &c2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+
+#test sscanf_c_test_5
+  char str[BUFF_SIZE] = "+z";
+  char format[BUFF_SIZE] = "+%c";
+  char c1 = 0, c2 = 0;
+  int res1 = s21_sscanf(str, format, &c1);
+  int res2 = sscanf(str, format, &c2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+
+#test sscanf_c_test_6
+  char str[BUFF_SIZE] = "   z";
+  char format[BUFF_SIZE] = " %c";
+  char c1 = 0, c2 = 0;
+  int res1 = s21_sscanf(str, format, &c1);
+  int res2 = sscanf(str, format, &c2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+
+#test sscanf_c_test_7
+  char str[BUFF_SIZE] = "   zv";
+  char format[BUFF_SIZE] = " %c%c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_8
+  char str[BUFF_SIZE] = "   z   v";
+  char format[BUFF_SIZE] = " %c %c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_9
+  char str[BUFF_SIZE] = "   z  \0v";
+  char format[BUFF_SIZE] = " %c %c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_10
+  char str[BUFF_SIZE] = "   z   ";
+  char format[BUFF_SIZE] = " %c %c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_11
+  char str[BUFF_SIZE] = "   z%";
+  char format[BUFF_SIZE] = " %c%%";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_12
+  char str[BUFF_SIZE] = "   zv";
+  char format[BUFF_SIZE] = " %c%*c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_13
+  char str[BUFF_SIZE] = " ";
+  char format[BUFF_SIZE] = " %c%c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_14
+  char str[BUFF_SIZE] = "12-34";
+  char format[BUFF_SIZE] = "%c- %c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_c_test_15
+  char str[BUFF_SIZE] = "1-34";
+  char format[BUFF_SIZE] = "%c- %c";
+  char c1 = 0, c2 = 0;
+  char c3 = 0, c4 = 0;
+  int res1 = s21_sscanf(str, format, &c1, &c3);
+  int res2 = sscanf(str, format, &c2, &c4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(c1, c2);
+  ck_assert_int_eq(c3, c4);
+
+#test sscanf_d_test_1
+  char str[BUFF_SIZE] = "123";
+  char format[BUFF_SIZE] = "%d";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_d_test_2
+  char str[BUFF_SIZE] = "   -456";
+  char format[BUFF_SIZE] = "%d";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_d_test_3
+  char str[BUFF_SIZE] = " 789 ";
+  char format[BUFF_SIZE] = "%d";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_d_test_4
+  char str[BUFF_SIZE] = "12 34 56";
+  char format[BUFF_SIZE] = "%d %d %d";
+  int d1 = 0, d2 = 0, d3 = 0;
+  int d4 = 0, d5 = 0, d6 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d2, &d3);
+  int res2 = sscanf(str, format, &d4, &d5, &d6);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d4);
+  ck_assert_int_eq(d2, d5);
+  ck_assert_int_eq(d3, d6);
+
+#test sscanf_d_test_5
+  char str[BUFF_SIZE] = "-789";
+  char format[BUFF_SIZE] = "%3d";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_d_test_6
+  char str[BUFF_SIZE] = "42  56";
+  char format[BUFF_SIZE] = "%2d %d";
+  int d1 = 0, d3 = 0;
+  int d2 = 0, d4 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d3);
+  int res2 = sscanf(str, format, &d2, &d4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+  ck_assert_int_eq(d3, d4);
+
+#test sscanf_d_test_7
+  char str[BUFF_SIZE] = "   1000";
+  char format[BUFF_SIZE] = "%5hd";
+  short hd1 = 0;
+  short hd2 = 0;
+  int res1 = s21_sscanf(str, format, &hd1);
+  int res2 = sscanf(str, format, &hd2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+
+#test sscanf_d_test_8
+  char str[BUFF_SIZE] = "   12345";
+  char format[BUFF_SIZE] = "%ld";
+  long d1 = 0;
+  long d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_d_test_9
+  char str[BUFF_SIZE] = "-12 456 789";
+  char format[BUFF_SIZE] = "%3d %d %d";
+  int d1 = 0, d2 = 0, d3 = 0;
+  int d4 = 0, d5 = 0, d6 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d2, &d3);
+  int res2 = sscanf(str, format, &d4, &d5, &d6);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d4);
+  ck_assert_int_eq(d2, d5);
+  ck_assert_int_eq(d3, d6);
+
+#test sscanf_d_test_10
+  char str[BUFF_SIZE] = "42 56";
+  char format[BUFF_SIZE] = "%2hd %hd";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_d_test_11
+  char str[BUFF_SIZE] = "42 d";
+  char format[BUFF_SIZE] = "%2hd %hd";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_d_test_12
+  char str[BUFF_SIZE] = "42 3";
+  char format[BUFF_SIZE] = "%2hd %*hd";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_f_test_1
+  char str[BUFF_SIZE] = "122.345";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_2
+  char str[BUFF_SIZE] = "122.345 543.221";
+  char format[BUFF_SIZE] = "%f %f";
+  float f1 = 0, f2 = 0;
+  float f3 = 0, f4 = 0;
+  int res1 = s21_sscanf(str, format, &f1, &f3);
+  int res2 = sscanf(str, format, &f2, &f4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+  ck_assert_float_eq(f3, f4);
+
+#test sscanf_f_test_3
+  char str[BUFF_SIZE] = "122.345isGOOOD";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_4
+  char str[BUFF_SIZE] = "-122.345";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_5
+  char str[BUFF_SIZE] = "122";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_6
+  char str[BUFF_SIZE] = ".122";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_7
+  char str[BUFF_SIZE] = "122.";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_8
+  char str[BUFF_SIZE] = "0.00122";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_9
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_10
+  char str[BUFF_SIZE] = "3.402823466E+39";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_11
+  char str[BUFF_SIZE] = "1.175494351E-38";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_12
+  char str[BUFF_SIZE] = "aboba";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_13
+  char str[BUFF_SIZE] = "nan";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_nan(f1);
+
+#test sscanf_f_test_14
+  char str[BUFF_SIZE] = "inf";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_15
+  char str[BUFF_SIZE] = "122,345";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_16
+  char str[BUFF_SIZE] = "12A2.345";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_17
+  char str[BUFF_SIZE] = " 122.345  ";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_18
+  char str[BUFF_SIZE] = "122.34500000";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_19
+  char str[BUFF_SIZE] = "-1.175494e+12";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_20
+  char str[BUFF_SIZE] = "+1.175494e-12";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_21
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%1f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_22
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%2f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_23
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%3f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_24
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%4f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_25
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%5f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_26
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%6f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_27
+  char str[BUFF_SIZE] = "-3.14e0";
+  char format[BUFF_SIZE] = "%7f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_28
+  char str[BUFF_SIZE] = "-0";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_29
+  char str[BUFF_SIZE] = "+0";
+  char format[BUFF_SIZE] = "%f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_f_test_30
+  char str[BUFF_SIZE] = "2.2250738585072014E-308";
+  char format[BUFF_SIZE] = "%lf";
+  double lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_double_eq(lf1, lf2);
+
+#test sscanf_f_test_31
+  char str[BUFF_SIZE] = "2.2250738585072014E-308";
+  char format[BUFF_SIZE] = "%Lf";
+  long double lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_double_eq(lf1, lf2);
+
+#test sscanf_f_test_32
+  char str[BUFF_SIZE] = "2.2250738E-15";
+  char format[BUFF_SIZE] = "%e";
+  float lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(lf1, lf2);
+
+#test sscanf_f_test_33
+  char str[BUFF_SIZE] = "1.7976931E+15";
+  char format[BUFF_SIZE] = "%e";
+  float lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(lf1, lf2);
+
+#test sscanf_f_test_34
+  char str[BUFF_SIZE] = "2.2250738585072014E-308";
+  char format[BUFF_SIZE] = "%Le";
+  long double lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_double_eq(lf1, lf2);
+
+#test sscanf_f_test_35
+  char str[BUFF_SIZE] = "2.2250738E-15";
+  char format[BUFF_SIZE] = "%g";
+  float lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(lf1, lf2);
+
+#test sscanf_f_test_36
+  char str[BUFF_SIZE] = "1.7976931E+15";
+  char format[BUFF_SIZE] = "%g";
+  float lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(lf1, lf2);
+
+#test sscanf_f_test_37
+  char str[BUFF_SIZE] = "2.2250738585072014E-308";
+  char format[BUFF_SIZE] = "%Lg";
+  long double lf1 = 0, lf2 = 0;
+  int res1 = s21_sscanf(str, format, &lf1);
+  int res2 = sscanf(str, format, &lf2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_double_eq(lf1, lf2);
+
+#test sscanf_f_test_38
+  char str[BUFF_SIZE] = "2.22 122.2";
+  char format[BUFF_SIZE] = "%f %*f";
+  float f1 = 0, f2 = 0;
+  int res1 = s21_sscanf(str, format, &f1);
+  int res2 = sscanf(str, format, &f2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_float_eq(f1, f2);
+
+#test sscanf_i_test_1
+  char str[BUFF_SIZE] = "123";
+  char format[BUFF_SIZE] = "%i";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_i_test_2
+  char str[BUFF_SIZE] = "   -456";
+  char format[BUFF_SIZE] = "%i";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_i_test_3
+  char str[BUFF_SIZE] = " 789 ";
+  char format[BUFF_SIZE] = "%i";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_i_test_4
+  char str[BUFF_SIZE] = "12 34 56";
+  char format[BUFF_SIZE] = "%i %i %i";
+  int d1 = 0, d2 = 0, d3 = 0;
+  int d4 = 0, d5 = 0, d6 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d2, &d3);
+  int res2 = sscanf(str, format, &d4, &d5, &d6);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d4);
+  ck_assert_int_eq(d2, d5);
+  ck_assert_int_eq(d3, d6);
+
+#test sscanf_i_test_5
+  char str[BUFF_SIZE] = "-789";
+  char format[BUFF_SIZE] = "%3i";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_i_test_6
+  char str[BUFF_SIZE] = "42  56";
+  char format[BUFF_SIZE] = "%2i %i";
+  int d1 = 0, d3 = 0;
+  int d2 = 0, d4 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d3);
+  int res2 = sscanf(str, format, &d2, &d4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+  ck_assert_int_eq(d3, d4);
+
+#test sscanf_i_test_7
+  char str[BUFF_SIZE] = "   1000";
+  char format[BUFF_SIZE] = "%5hi";
+  short hd1 = 0;
+  short hd2 = 0;
+  int res1 = s21_sscanf(str, format, &hd1);
+  int res2 = sscanf(str, format, &hd2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+
+#test sscanf_i_test_8
+  char str[BUFF_SIZE] = "   12345";
+  char format[BUFF_SIZE] = "%li";
+  long d1 = 0;
+  long d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_i_test_9
+  char str[BUFF_SIZE] = "-12 456 789";
+  char format[BUFF_SIZE] = "%3i %i %i";
+  int d1 = 0, d2 = 0, d3 = 0;
+  int d4 = 0, d5 = 0, d6 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d2, &d3);
+  int res2 = sscanf(str, format, &d4, &d5, &d6);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d4);
+  ck_assert_int_eq(d2, d5);
+  ck_assert_int_eq(d3, d6);
+
+#test sscanf_i_test_10
+  char str[BUFF_SIZE] = "42 56";
+  char format[BUFF_SIZE] = "%2hi %hi";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_i_test_11
+  char str[BUFF_SIZE] = "42 d";
+  char format[BUFF_SIZE] = "%2hi %hi";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_i_test_12
+  char str[BUFF_SIZE] = "0xabcd";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_13
+  char str[BUFF_SIZE] = "0";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_14
+  char str[BUFF_SIZE] = "0x0";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_15
+  char str[BUFF_SIZE] = "0XABCD";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_16
+  char str[BUFF_SIZE] = "-0XABCD";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_17
+  char str[BUFF_SIZE] = " 0XAB";
+  char format[BUFF_SIZE] = "%3i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_18
+  char str[BUFF_SIZE] = "0172";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_19
+  char str[BUFF_SIZE] = "00";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_20
+  char str[BUFF_SIZE] = "0666";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_21
+  char str[BUFF_SIZE] = "-0122";
+  char format[BUFF_SIZE] = "%i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_i_test_22
+  char str[BUFF_SIZE] = " 012345";
+  char format[BUFF_SIZE] = "%3i";
+  int i1 = 0, i2 = 0;
+  int res1 = s21_sscanf(str, format, &i1);
+  int res2 = sscanf(str, format, &i2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(i1, i2);
+
+#test sscanf_n_test_1
+  char str[BUFF_SIZE] = "Hello";
+  char format[BUFF_SIZE] = "%s%n";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  int n1 = 0, n2 = 0;
+  int res1 = s21_sscanf(str, format, &s1, &n1);
+  int res2 = sscanf(str, format, &s2, &n2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(n1, n2);
+
+#test sscanf_n_test_2
+  char str[BUFF_SIZE] = "Hello World";
+  char format[BUFF_SIZE] = "%s %s%n";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  char s3[BUFF_SIZE] = "";
+  char s4[BUFF_SIZE] = "";
+  int n1 = 0, n2 = 0;
+  int res1 = s21_sscanf(str, format, &s1, &s3, &n1);
+  int res2 = sscanf(str, format, &s2, &s4, &n2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(n1, n2);
+
+#test sscanf_n_test_3
+  char str[BUFF_SIZE] = "Hello World";
+  char format[BUFF_SIZE] = "%s %*s%n";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  char s3[BUFF_SIZE] = "";
+  char s4[BUFF_SIZE] = "";
+  int n1 = 0, n2 = 0;
+  int res1 = s21_sscanf(str, format, &s1, &s3, &n1);
+  int res2 = sscanf(str, format, &s2, &s4, &n2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(n1, n2);
+
+#test sscanf_n_test_4
+  char str[BUFF_SIZE] = "Hello here";
+  char format[BUFF_SIZE] = "%4s%2s%n";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  char s3[BUFF_SIZE] = "";
+  char s4[BUFF_SIZE] = "";
+  int n1 = 0, n2 = 0;
+  int res1 = s21_sscanf(str, format, &s1, &s3, &n1);
+  int res2 = sscanf(str, format, &s2, &s4, &n2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+  ck_assert_pstr_eq(s3, s4);
+  ck_assert_int_eq(n1, n2);
+
+#test sscanf_o_test_1
+  char str[BUFF_SIZE] = "123456";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_2
+  char str[BUFF_SIZE] = "0123456";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_3
+  char str[BUFF_SIZE] = "0";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_4
+  char str[BUFF_SIZE] = "-765";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_5
+  char str[BUFF_SIZE] = "xyz";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_6
+  char str[BUFF_SIZE] = "+765";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_7
+  char str[BUFF_SIZE] = "00765";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_8
+  char str[BUFF_SIZE] = "  0765";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_9
+  char str[BUFF_SIZE] = "00765  ";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_10
+  char str[BUFF_SIZE] = "765.52";
+  char format[BUFF_SIZE] = "%o";
+  unsigned int o1 = 0, o2 = 0;
+  int res1 = s21_sscanf(str, format, &o1);
+  int res2 = sscanf(str, format, &o2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+
+#test sscanf_o_test_11
+  char str[BUFF_SIZE] = "123456";
+  char format[BUFF_SIZE] = "%ho";
+  unsigned short ho1 = 0, ho2 = 0;
+  int res1 = s21_sscanf(str, format, &ho1);
+  int res2 = sscanf(str, format, &ho2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(ho1, ho2);
+
+#test sscanf_o_test_12
+  char str[BUFF_SIZE] = "123456";
+  char format[BUFF_SIZE] = "%lo";
+  unsigned long lo1 = 0, lo2 = 0;
+  int res1 = s21_sscanf(str, format, &lo1);
+  int res2 = sscanf(str, format, &lo2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(lo1, lo2);
+
+#test sscanf_p_test_1
+  int integer = 5;
+  int *p1a = &integer;
+  int *p2a;
+  int *p3a;
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "%p";
+  sprintf(str, "%p", p1a);
+  int res1 = s21_sscanf(str, format, &p2a);
+  int res2 = sscanf(str, format, &p3a);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_ptr_eq(p2a, p3a);
+
+#test sscanf_p_test_2
+  int a1 = 0, a2 = 0;
+  int *p2a = &a1;
+  int *p3a = &a2;
+  char str[BUFF_SIZE] = "HelloWorld";
+  char format[BUFF_SIZE] = "%p";
+  int res1 = s21_sscanf(str, format, &p2a);
+  int res2 = sscanf(str, format, &p3a);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_ptr_ne(p2a, p3a);
+
+#test sscanf_p_test_3
+  int integer = 5;
+  int *p1a = &integer;
+  int *p2a;
+  int *p3a;
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "%p %*p";
+  sprintf(str, "%p %p", p1a, p1a);
+  int res1 = s21_sscanf(str, format, &p2a);
+  int res2 = sscanf(str, format, &p3a);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_ptr_eq(p2a, p3a);
+
+#test sscanf_s_test_1
+  char str[BUFF_SIZE] = "Hello";
+  char format[BUFF_SIZE] = "%s";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  int res1 = s21_sscanf(str, format, &s1);
+  int res2 = sscanf(str, format, &s2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+
+#test sscanf_s_test_2
+  char str[BUFF_SIZE] = "Hello World";
+  char format[BUFF_SIZE] = "%s %s";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  char s3[BUFF_SIZE] = "";
+  char s4[BUFF_SIZE] = "";
+  int res1 = s21_sscanf(str, format, &s1, &s3);
+  int res2 = sscanf(str, format, &s2, &s4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+  ck_assert_pstr_eq(s3, s4);
+
+#test sscanf_s_test_3
+  char str[BUFF_SIZE] = "Hello World";
+  char format[BUFF_SIZE] = "%s %*s";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  char s3[BUFF_SIZE] = "";
+  char s4[BUFF_SIZE] = "";
+  int res1 = s21_sscanf(str, format, &s1, &s3);
+  int res2 = sscanf(str, format, &s2, &s4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+  ck_assert_pstr_eq(s3, s4);
+
+#test sscanf_s_test_4
+  char str[BUFF_SIZE] = "Hello\0";
+  char format[BUFF_SIZE] = "%s %s";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  char s3[BUFF_SIZE] = "";
+  char s4[BUFF_SIZE] = "";
+  int res1 = s21_sscanf(str, format, &s1, &s3);
+  int res2 = sscanf(str, format, &s2, &s4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+  ck_assert_pstr_eq(s3, s4);
+
+#test sscanf_s_test_5
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "%s";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  int res1 = s21_sscanf(str, format, &s1);
+  int res2 = sscanf(str, format, &s2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+
+#test sscanf_s_test_6
+  char str[BUFF_SIZE] = "   Hello";
+  char format[BUFF_SIZE] = "%s";
+  char s1[BUFF_SIZE] = "";
+  char s2[BUFF_SIZE] = "";
+  int res1 = s21_sscanf(str, format, &s1);
+  int res2 = sscanf(str, format, &s2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_pstr_eq(s1, s2);
+
+#test sscanf_u_test_1
+  char str[BUFF_SIZE] = "123";
+  char format[BUFF_SIZE] = "%u";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_u_test_2
+  char str[BUFF_SIZE] = "   -456";
+  char format[BUFF_SIZE] = "%u";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_u_test_3
+  char str[BUFF_SIZE] = " 789 ";
+  char format[BUFF_SIZE] = "%u";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_u_test_4
+  char str[BUFF_SIZE] = "12 34 56";
+  char format[BUFF_SIZE] = "%u %u %u";
+  int d1 = 0, d2 = 0, d3 = 0;
+  int d4 = 0, d5 = 0, d6 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d2, &d3);
+  int res2 = sscanf(str, format, &d4, &d5, &d6);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d4);
+  ck_assert_int_eq(d2, d5);
+  ck_assert_int_eq(d3, d6);
+
+#test sscanf_u_test_5
+  char str[BUFF_SIZE] = " 789";
+  char format[BUFF_SIZE] = "%3u";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_u_test_6
+  char str[BUFF_SIZE] = "42  56";
+  char format[BUFF_SIZE] = "%2u %u";
+  int d1 = 0, d3 = 0;
+  int d2 = 0, d4 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d3);
+  int res2 = sscanf(str, format, &d2, &d4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+  ck_assert_int_eq(d3, d4);
+
+#test sscanf_u_test_7
+  char str[BUFF_SIZE] = "   1000";
+  char format[BUFF_SIZE] = "%5hu";
+  short hd1 = 0;
+  short hd2 = 0;
+  int res1 = s21_sscanf(str, format, &hd1);
+  int res2 = sscanf(str, format, &hd2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+
+#test sscanf_u_test_8
+  char str[BUFF_SIZE] = "   12345";
+  char format[BUFF_SIZE] = "%lu";
+  long d1 = 0;
+  long d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_u_test_9
+  char str[BUFF_SIZE] = " 12 456 789";
+  char format[BUFF_SIZE] = "%3u %u %u";
+  int d1 = 0, d2 = 0, d3 = 0;
+  int d4 = 0, d5 = 0, d6 = 0;
+  int res1 = s21_sscanf(str, format, &d1, &d2, &d3);
+  int res2 = sscanf(str, format, &d4, &d5, &d6);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d4);
+  ck_assert_int_eq(d2, d5);
+  ck_assert_int_eq(d3, d6);
+
+#test sscanf_u_test_10
+  char str[BUFF_SIZE] = "42 56";
+  char format[BUFF_SIZE] = "%2hu %hu";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_u_test_11
+  char str[BUFF_SIZE] = "42 d";
+  char format[BUFF_SIZE] = "%2hu %hu";
+  short hd1 = 0, hd2 = 0;
+  short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1, &hd3);
+  int res2 = sscanf(str, format, &hd2, &hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+  ck_assert_int_eq(hd3, hd4);
+
+#test sscanf_u_test_12
+  char str[BUFF_SIZE] = "-456";
+  char format[BUFF_SIZE] = "%3u";
+  int d1 = 0, d2 = 0;
+  int res1 = s21_sscanf(str, format, &d1);
+  int res2 = sscanf(str, format, &d2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+
+#test sscanf_u_test_13
+  char str[BUFF_SIZE] = "42 43";
+  char format[BUFF_SIZE] = "%2hu %*hu";
+  short hd1 = 0, hd2 = 0;
+  int res1 = s21_sscanf(str, format, &hd1);
+  int res2 = sscanf(str, format, &hd2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(hd1, hd2);
+
+#test sscanf_x_test_1
+  char str[BUFF_SIZE] = "1A2F";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_2
+  char str[BUFF_SIZE] = "G12D";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_3
+  char str[BUFF_SIZE] = "FF 0A 2B";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_4
+  char str[BUFF_SIZE] = "";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_5
+  char str[BUFF_SIZE] = "0";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_6
+  char str[BUFF_SIZE] = "-F2B";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_7
+  char str[BUFF_SIZE] = "ABCD";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_8
+  char str[BUFF_SIZE] = "d3e5";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_9
+  char str[BUFF_SIZE] = "0x1F";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_10
+  char str[BUFF_SIZE] = "12A3hello";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_11
+  char str[BUFF_SIZE] = "1A2F 0B4C";
+  char format[BUFF_SIZE] = "%x%x";
+  unsigned int x1 = 0, x2 = 0;
+  unsigned int x3 = 0, x4 = 0;
+  int res1 = s21_sscanf(str, format, &x1, &x3);
+  int res2 = sscanf(str, format, &x2, &x4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+  ck_assert_uint_eq(x3, x4);
+
+#test sscanf_x_test_12
+  char str[BUFF_SIZE] = "FFFFFFFF";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_13
+  char str[BUFF_SIZE] = "f";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_14
+  char str[BUFF_SIZE] = "1E8";
+  char format[BUFF_SIZE] = "%x";
+  unsigned int x1 = 0, x2 = 0;
+  int res1 = s21_sscanf(str, format, &x1);
+  int res2 = sscanf(str, format, &x2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(x1, x2);
+
+#test sscanf_x_test_15
+  char str[BUFF_SIZE] = "123456";
+  char format[BUFF_SIZE] = "%hx";
+  unsigned short hx1 = 0, hx2 = 0;
+  int res1 = s21_sscanf(str, format, &hx1);
+  int res2 = sscanf(str, format, &hx2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(hx1, hx2);
+
+#test sscanf_x_test_16
+  char str[BUFF_SIZE] = "123456";
+  char format[BUFF_SIZE] = "%lx";
+  unsigned long lx1 = 0, lx2 = 0;
+  int res1 = s21_sscanf(str, format, &lx1);
+  int res2 = sscanf(str, format, &lx2);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(lx1, lx2);
+
+#test s21_scanf_integer_parsing_test1
+int value = 0;
+int expected_value = 42;
+const char *input = "42";
+int result = s21_sscanf(input, "%d", &value);
+ck_assert_int_eq(result, 1);
+ck_assert_int_eq(value, expected_value);
+
+#test s21_scanf_multiple_integers_test1
+int a = 0, b = 0;
+int result = s21_sscanf("10 20", "%d %d", &a, &b);
+ck_assert_int_eq(result, 2);
+ck_assert_int_eq(a, 10);
+ck_assert_int_eq(b, 20);
+
+#test s21_scanf_float_parsing_test1
+double value = 0.0;
+int result = s21_sscanf("3.14", "%lf", &value);
+ck_assert_int_eq(result, 1);
+ck_assert_double_eq_tol(value, 3.14, 1e-6);
+
+#test s21_scanf_string_parsing_test1
+char buffer[100] = {0};
+int result = s21_sscanf("hello", "%s", buffer);
+ck_assert_int_eq(result, 1);
+ck_assert_str_eq(buffer, "hello");
+
+#test s21_scanf_char_parsing_test1
+char c = '\0';
+int result = s21_sscanf("A", "%c", &c);
+ck_assert_int_eq(result, 1);
+ck_assert_int_eq(c, 'A');
+
+#test s21_scanf_width_specifier_test1
+char buffer[100] = {0};
+int result = s21_sscanf("abcdef", "%3s", buffer);
+ck_assert_int_eq(result, 1);
+ck_assert_str_eq(buffer, "abc");
+
+#test s21_scanf_ignored_assignment_test1
+int value = 0;
+int result = s21_sscanf("42", "%*d%d", &value);
+int expected = sscanf("42", "%*d%d", &value);
+ck_assert_int_eq(result, expected);
+ck_assert_int_eq(value, 0);
+
+#test s21_scanf_spaces_handling_test1
+int value = 0;
+int result = s21_sscanf("   99   ", "%d", &value);
+ck_assert_int_eq(result, 1);
+ck_assert_int_eq(value, 99);
+
+#test s21_scanf_invalid_input_test1
+int value = 0;
+int result = s21_sscanf("abc", "%d", &value);
+ck_assert_int_eq(result, 0);
+
+//d max
+#test sscanf_max_scan_test_1
+  char str[BUFF_SIZE] = "9223372036854775806";
+  char format[BUFF_SIZE] = "%d%d";
+  int d1 = 0, d2 = 0;
+	int d3 = 0, d4 = 0;
+  int res1 = s21_sscanf(str, format, &d1,&d3);
+  int res2 = sscanf(str, format, &d2,&d4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+	ck_assert_int_eq(d3, d4);
+
+#test sscanf_max_scan_test_2
+  char str[BUFF_SIZE] = "9223372036854775807";
+  char format[BUFF_SIZE] = "%d%d";
+  int d1 = 0, d2 = 0;
+	int d3 = 0, d4 = 0;
+  int res1 = s21_sscanf(str, format, &d1,&d3);
+  int res2 = sscanf(str, format, &d2,&d4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(d1, d2);
+	ck_assert_int_eq(d3, d4);
+
+//hd max
+#test sscanf_max_scan_test_3
+  char str[BUFF_SIZE] = "9223372036854775806";
+  char format[BUFF_SIZE] = "%hd%hd";
+  short hd1 = 0, hd2 = 0;
+	short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1,&hd3);
+  int res2 = sscanf(str, format, &hd2,&hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq((int)hd1, (int)hd2);
+	ck_assert_int_eq((int)hd3, (int)hd4);
+
+#test sscanf_max_scan_test_4
+  char str[BUFF_SIZE] = "9223372036854775807";
+  char format[BUFF_SIZE] = "%hd%hd";
+  short hd1 = 0, hd2 = 0;
+	short hd3 = 0, hd4 = 0;
+  int res1 = s21_sscanf(str, format, &hd1,&hd3);
+  int res2 = sscanf(str, format, &hd2,&hd4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq((int)hd1, (int)hd2);
+	ck_assert_int_eq((int)hd3, (int)hd4);
+
+//ld max
+#test sscanf_max_scan_test_5
+  char str[BUFF_SIZE] = "9223372036854775806";
+  char format[BUFF_SIZE] = "%ld%ld";
+  long ld1 = 0, ld2 = 0;
+	long ld3 = 0, ld4 = 0;
+  int res1 = s21_sscanf(str, format, &ld1,&ld3);
+  int res2 = sscanf(str, format, &ld2,&ld4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(ld1, ld2);
+	ck_assert_int_eq(ld3, ld4);
+
+#test sscanf_max_scan_test_6
+  char str[BUFF_SIZE] = "9223372036854775807";
+  char format[BUFF_SIZE] = "%ld%ld";
+  long ld1 = 0, ld2 = 0;
+	long ld3 = 0, ld4 = 0;
+  int res1 = s21_sscanf(str, format, &ld1,&ld3);
+  int res2 = sscanf(str, format, &ld2,&ld4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq(ld1, ld2);
+	ck_assert_int_eq(ld3, ld4);
+
+//u max
+#test sscanf_max_scan_test_7
+  char str[BUFF_SIZE] = "18446744073709551614";
+  char format[BUFF_SIZE] = "%u%u";
+  unsigned int u1 = 0, u2 = 0;
+	unsigned int u3 = 0, u4 = 0;
+  int res1 = s21_sscanf(str, format, &u1,&u3);
+  int res2 = sscanf(str, format, &u2,&u4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(u1, u2);
+	ck_assert_uint_eq(u3, u4);
+
+#test sscanf_max_scan_test_8
+  char str[BUFF_SIZE] = "18446744073709551615";
+  char format[BUFF_SIZE] = "%u%u";
+  unsigned int u1 = 0, u2 = 0;
+	unsigned int u3 = 0, u4 = 0;
+  int res1 = s21_sscanf(str, format, &u1,&u3);
+  int res2 = sscanf(str, format, &u2,&u4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(u1, u2);
+	ck_assert_uint_eq(u3, u4);
+
+//hu max
+#test sscanf_max_scan_test_9
+  char str[BUFF_SIZE] = "18446744073709551614";
+  char format[BUFF_SIZE] = "%hu%hu";
+  unsigned short hu1 = 0, hu2 = 0;
+	unsigned short hu3 = 0, hu4 = 0;
+  int res1 = s21_sscanf(str, format, &hu1,&hu3);
+  int res2 = sscanf(str, format, &hu2,&hu4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq((unsigned int)hu1, (unsigned int)hu2);
+	ck_assert_uint_eq((unsigned int)hu3, (unsigned int)hu4);
+
+#test sscanf_max_scan_test_10
+  char str[BUFF_SIZE] = "18446744073709551615";
+  char format[BUFF_SIZE] = "%hu%hu";
+  unsigned short hu1 = 0, hu2 = 0;
+	unsigned short hu3 = 0, hu4 = 0;
+  int res1 = s21_sscanf(str, format, &hu1,&hu3);
+  int res2 = sscanf(str, format, &hu2,&hu4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq((unsigned int)hu1, (unsigned int)hu2);
+	ck_assert_uint_eq((unsigned int)hu3, (unsigned int)hu4);
+
+//lu max
+#test sscanf_max_scan_test_11
+  char str[BUFF_SIZE] = "18446744073709551614";
+  char format[BUFF_SIZE] = "%lu%lu";
+  unsigned long lu1 = 0, lu2 = 0;
+	unsigned long lu3 = 0, lu4 = 0;
+  int res1 = s21_sscanf(str, format, &lu1,&lu3);
+  int res2 = sscanf(str, format, &lu2,&lu4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert(lu1==lu2);
+	ck_assert(lu3==lu4);
+
+#test sscanf_max_scan_test_12
+  char str[BUFF_SIZE] = "18446744073709551615";
+  char format[BUFF_SIZE] = "%lu%lu";
+  unsigned long lu1 = 0, lu2 = 0;
+	unsigned long lu3 = 0, lu4 = 0;
+  int res1 = s21_sscanf(str, format, &lu1,&lu3);
+  int res2 = sscanf(str, format, &lu2,&lu4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert(lu1==lu2);
+	ck_assert(lu3==lu4);
+
+//i max
+#test sscanf_max_scan_test_13
+  char str[BUFF_SIZE] = "9223372036854775806";
+  char format[BUFF_SIZE] = "%i%i";
+  int i1 = 0, i2 = 0;
+	int i3 = 0, i4 = 0;
+  int res1 = s21_sscanf(str, format, &i1,&i3);
+  int res2 = sscanf(str, format, &i2,&i4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(i1, i2);
+	ck_assert_uint_eq(i3, i4);
+
+#test sscanf_max_scan_test_14
+  char str[BUFF_SIZE] = "9223372036854775807";
+  char format[BUFF_SIZE] = "%i%i";
+  int i1 = 0, i2 = 0;
+	int i3 = 0, i4 = 0;
+  int res1 = s21_sscanf(str, format, &i1,&i3);
+  int res2 = sscanf(str, format, &i2,&i4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(i1, i2);
+	ck_assert_uint_eq(i3, i4);
+
+//hi max
+#test sscanf_max_scan_test_15
+  char str[BUFF_SIZE] = "9223372036854775806";
+  char format[BUFF_SIZE] = "%hi%hi";
+  short hi1 = 0, hi2 = 0;
+	short hi3 = 0, hi4 = 0;
+  int res1 = s21_sscanf(str, format, &hi1,&hi3);
+  int res2 = sscanf(str, format, &hi2,&hi4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq((int)hi1, (int)hi2);
+	ck_assert_int_eq((int)hi3, (int)hi4);
+
+#test sscanf_max_scan_test_16
+  char str[BUFF_SIZE] = "9223372036854775807";
+  char format[BUFF_SIZE] = "%hi%hi";
+  short hi1 = 0, hi2 = 0;
+	short hi3 = 0, hi4 = 0;
+  int res1 = s21_sscanf(str, format, &hi1,&hi3);
+  int res2 = sscanf(str, format, &hi2,&hi4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_int_eq((int)hi1, (int)hi2);
+	ck_assert_int_eq((int)hi3, (int)hi4);
+
+//li max
+#test sscanf_max_scan_test_17
+  char str[BUFF_SIZE] = "9223372036854775806";
+  char format[BUFF_SIZE] = "%li%li";
+  long li1 = 0, li2 = 0;
+	long li3 = 0, li4 = 0;
+  int res1 = s21_sscanf(str, format, &li1,&li3);
+  int res2 = sscanf(str, format, &li2,&li4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert(li1 == li2);
+	ck_assert(li3 == li4);
+
+#test sscanf_max_scan_test_18
+  char str[BUFF_SIZE] = "9223372036854775807";
+  char format[BUFF_SIZE] = "%li%li";
+  long li1 = 0, li2 = 0;
+	long li3 = 0, li4 = 0;
+  int res1 = s21_sscanf(str, format, &li1,&li3);
+  int res2 = sscanf(str, format, &li2,&li4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert(li1 == li2);
+	ck_assert(li3 == li4);
+
+//o max
+#test sscanf_max_scan_test_19
+  char str[BUFF_SIZE] = "1777777777777777777776";
+  char format[BUFF_SIZE] = "%o%o";
+  unsigned int o1 = 0, o2 = 0;
+	unsigned int o3 = 0, o4 = 0;
+  int res1 = s21_sscanf(str, format, &o1,&o3);
+  int res2 = sscanf(str, format, &o2,&o4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+	ck_assert_uint_eq(o3, o4);
+
+#test sscanf_max_scan_test_20
+  char str[BUFF_SIZE] = "1777777777777777777777";
+  char format[BUFF_SIZE] = "%o%o";
+  unsigned int o1 = 0, o2 = 0;
+	unsigned int o3 = 0, o4 = 0;
+  int res1 = s21_sscanf(str, format, &o1,&o3);
+  int res2 = sscanf(str, format, &o2,&o4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq(o1, o2);
+	ck_assert_uint_eq(o3, o4);
+
+//ho max
+#test sscanf_max_scan_test_21
+  char str[BUFF_SIZE] = "1777777777777777777776";
+  char format[BUFF_SIZE] = "%ho%ho";
+  unsigned short ho1 = 0, ho2 = 0;
+	unsigned short ho3 = 0, ho4 = 0;
+  int res1 = s21_sscanf(str, format, &ho1,&ho3);
+  int res2 = sscanf(str, format, &ho2,&ho4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq((unsigned int)ho1, (unsigned int)ho2);
+	ck_assert_uint_eq((unsigned int)ho3, (unsigned int)ho4);
+
+#test sscanf_max_scan_test_22
+  char str[BUFF_SIZE] = "1777777777777777777777";
+  char format[BUFF_SIZE] = "%ho%ho";
+  unsigned short ho1 = 0, ho2 = 0;
+	unsigned short ho3 = 0, ho4 = 0;
+  int res1 = s21_sscanf(str, format, &ho1,&ho3);
+  int res2 = sscanf(str, format, &ho2,&ho4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert_uint_eq((unsigned int)ho1, (unsigned int)ho2);
+	ck_assert_uint_eq((unsigned int)ho3, (unsigned int)ho4);
+
+//lo max
+#test sscanf_max_scan_test_23
+  char str[BUFF_SIZE] = "037777777776";
+  char format[BUFF_SIZE] = "%lu%lu";
+  long unsigned int lo1 = 0, lo2 = 0;
+	long unsigned int lo3 = 0, lo4 = 0;
+  int res1 = s21_sscanf(str, format, &lo1,&lo3);
+  int res2 = sscanf(str, format, &lo2,&lo4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert(lo1==lo2);
+	ck_assert(lo3==lo4);
+
+#test sscanf_max_scan_test_24
+  char str[BUFF_SIZE] = "037777777777";
+  char format[BUFF_SIZE] = "%lu%lu";
+  unsigned long lo1 = 0, lo2 = 0;
+	unsigned long lo3 = 0, lo4 = 0;
+  int res1 = s21_sscanf(str, format, &lo1,&lo3);
+  int res2 = sscanf(str, format, &lo2,&lo4);
+  ck_assert_int_eq(res1, res2);
+  ck_assert(lo1==lo2);
+	ck_assert(lo3==lo4);
+
+#test s21_scanf_another_test1
+char *str = "1% hello world -2%";
+char *format = "%d%% hello %n world %d%% ";
+int a1, a2, b1, b2, n1, n2;
+ck_assert_int_eq(sscanf(str, format, &a1, &n1, &a2),
+                 s21_sscanf(str, format, &b1, &n2, &b2));
+ck_assert_int_eq(a1, b1);
+ck_assert_int_eq(a2, b2);
+ck_assert_int_eq(n2, n2);
+
+#test s21_scanf_another_test2
+char *str = "a hello world z";
+char *format = "%c hello %nworld %c ";
+int n1, n2;
+char a1, a2, b1, b2;
+ck_assert_int_eq(sscanf(str, format, &a1, &n1, &a2),
+                 s21_sscanf(str, format, &b1, &n2, &b2));
+ck_assert_int_eq(a1, b1);
+ck_assert_int_eq(a2, b2);
+ck_assert_int_eq(n2, n2);
+
+#test s21_scanf_another_test3
+char *str = " 12 19  -123  0.0  1234 ";
+char *format = "%d %*d %d %lf %d";
+int a1, a2, a3, b1, b2, b3;
+double fl1, fl2;
+ck_assert_int_eq(sscanf(str, format, &a1, &a2, &fl1, &a3),
+                 s21_sscanf(str, format, &b1, &b2, &fl2, &b3));
+ck_assert_int_eq(a1, b1);
+ck_assert_int_eq(a2, b2);
+ck_assert_int_eq(a3, b3);
+ck_assert_float_eq(fl1, fl2);
+

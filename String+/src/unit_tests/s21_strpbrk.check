@@ -1,0 +1,57 @@
+#suite s21_strpbrk_test
+
+#test s21_strpbrk_test1
+const char *str1 = "hello, world";
+const char *str2 = "ow";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test2
+const char *str1 = "abcde";
+const char *str2 = "a";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test3
+const char *str1 = "abcde";
+const char *str2 = "e";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test4
+const char *str1 = "abcde";
+const char *str2 = "";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test5
+const char *str1 = "";
+const char *str2 = "abc";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test6
+const char *str1 = "abcde";
+const char *str2 = "xyz";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test7
+const char *str1 = "";
+const char *str2 = "";
+char *expected = strpbrk(str1, str2);
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);
+
+#test s21_strpbrk_test8
+const char *str1 = "abcdef";
+const char *str2 = "d";
+char *expected = strpbrk(str1, str2); 
+char *result = s21_strpbrk(str1, str2);
+ck_assert(expected == result);

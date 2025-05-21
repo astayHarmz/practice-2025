@@ -1,0 +1,43 @@
+#suite s21_strchr_test
+
+#test s21_strchr_test1
+char str[] = "Hello, world!";
+char c = 'w';
+char *expected = strchr(str, c);
+char *result = s21_strchr(str, c);
+ck_assert(expected == result);
+
+#test s21_strchr_test2
+char str[] = "Hello, world!";
+char c = 'H';
+char *expected = strchr(str, c);
+char *result = s21_strchr(str, c);
+ck_assert(expected == result);
+
+#test s21_strchr_test3
+char str[] = "Hello, world!";
+char c = '!';
+char *expected = strchr(str, c);
+char *result = s21_strchr(str, c);
+ck_assert(expected == result);
+
+#test s21_strchr_test4
+char str[] = "Hello, world!";
+char c = 'z';
+char *expected = strchr(str, c);
+char *result = s21_strchr(str, c);
+ck_assert(expected == result);
+
+#test s21_strchr_test5
+char str[] = "Hello, world!";
+char c = '\0';
+char *expected = strchr(str, c);
+char *result = s21_strchr(str, c);
+ck_assert(expected == result);
+
+#test s21_strchr_test6
+char str[] = "";
+char c = 'a';
+char *expected = strchr(str, c);
+char *result = s21_strchr(str, c);
+ck_assert(expected == result);

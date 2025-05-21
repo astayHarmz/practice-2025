@@ -1,0 +1,19 @@
+#suite s21_strlen_test
+
+#test s21_strlen_test1
+const char *strlength = "Abobus"; 
+s21_size_t res1 = s21_strlen(strlength);
+size_t res2 = strlen(strlength);
+ck_assert_int_eq(res1, res2);
+
+#test s21_strlen_test2
+const char *strlength = ""; 
+s21_size_t res1 = s21_strlen(strlength);
+size_t res2 = strlen(strlength);
+ck_assert_int_eq(res1, res2);
+
+#test s21_strlen_test3
+const char *strlength = "\0"; 
+s21_size_t res1 = s21_strlen(strlength);
+size_t res2 = strlen(strlength);
+ck_assert_int_eq(res1, res2);

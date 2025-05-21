@@ -1,0 +1,291 @@
+#suite s21_strtok_test
+
+#test test_strtok_1
+  char str1[] = "Hello,hi,morning,evening,night";
+  char str2[] = "Hello,hi,morning,evening,night";
+  char *delim = ",";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_2
+  char str1[] = "file1/file2/file3/file4";
+  char str2[] = "file1/file2/file3/file4";
+  char *delim = "/";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_3
+  char str1[] = "world";
+  char str2[] = "world";
+  char *delim = "z";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+
+#test test_strtok_4
+  char str1[] = "It? :is a wo;nder:ful day!";
+  char str2[] = "It? :is a wo;nder:ful day!";
+  char *delim = " ?:\n\0";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_5
+  char str1[] = "How, :to use. computer";
+  char str2[] = "How, :to use. computer";
+  char *delim = ",:\n\0";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_6
+  char str1[] = "It is :a wond::::::::er;ful. d::::ay";
+  char str2[] = "It is :a wond::::::::er;ful. d::::ay";
+  char *delim = ":";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_7
+  char str1[] = "AaBbCcDdAaEeAa";
+  char str2[] = "AaBbCcDdAaEeAa";
+  char *delim = "a";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_8
+  char str1[] = "Z";
+  char str2[] = "Z";
+  char *delim = "\0";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_9
+  char str1[] = "Code.like.a.senior";
+  char str2[] = "Code.like.a.senior";
+  char *delim = ".";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+
+#test test_strtok_10
+  char str1[] = "qwerty";
+  char str2[] = "qwerty";
+  char *delim = "1234";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+
+#test test_strtok_11
+  char str1[] = "I/Love/You\\";
+  char str2[] = "I/Love/You\\";
+  char delim[] = "/";
+  char *res_1, *res_2;
+  res_1 = strtok(str1, delim);
+  res_2 = s21_strtok(str2, delim);
+  while (res_1 != S21_NULL || res_2 != S21_NULL) {
+    ck_assert_pstr_eq(res_1, res_2);
+    res_1 = strtok(S21_NULL, delim);
+    res_2 = s21_strtok(S21_NULL, delim);
+  }
+
+
+#test test_strtok_12
+  char str1[] =
+      "What is love? It is our desire to feel the person, to make him or her "
+      "happy, and to share the most sensitive moments together.";
+  char str2[] =
+      "What is love? It is our desire to feel the person, to make him or her "
+      "happy, and to share the most sensitive moments together.";
+  char delim[] = " ,.-";
+  char *res_1, *res_2;
+  res_1 = strtok(str1, delim);
+  res_2 = s21_strtok(str2, delim);
+  while (res_1 != S21_NULL) {
+    ck_assert_pstr_eq(res_1, res_2);
+    res_1 = strtok(S21_NULL, delim);
+    res_2 = s21_strtok(S21_NULL, delim);
+  }
+
+
+#test test_strtok_13
+  char str1[] = "Love is in the air";
+  char str2[] = "Love is in the air";
+  char *delim = "";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+
+#test test_strtok_14
+  char str1[] = "";
+  char str2[] = "";
+  char *delim = "x";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+#test test_strtok_15
+  char str1[] = "I/Love/You\\";
+  char str2[] = "I/Love/You\\";
+  char delim[] = "";
+  char *res_1, *res_2;
+  res_1 = strtok(str1, delim);
+  res_2 = s21_strtok(str2, delim);
+  while (res_1 != S21_NULL || res_2 != S21_NULL) {
+    ck_assert_pstr_eq(res_1, res_2);
+    res_1 = strtok(S21_NULL, delim);
+    res_2 = s21_strtok(S21_NULL, delim);
+  }
+
+
+#test test_strtok_16
+  char str1[] = "Let's talk about work now.";
+  char str2[] = "Let's talk about work now.";
+  char *delim = "?,";
+  char* token1 = s21_strtok(str1, delim);
+  char* token2 = strtok(str2, delim);
+  token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(S21_NULL, delim);
+    token2 = strtok(S21_NULL, delim);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+  }
+
+
+#test test_strtok_17
+  char str1[] = "Let's talk about work now.";
+  char str2[] = "Let's talk about work now.";
+  char delim[] = "?,<";
+  char *res_1, *res_2;
+  res_1 = strtok(str1, delim);
+  res_2 = s21_strtok(str2, delim);
+  while (res_1 != S21_NULL || res_2 != S21_NULL) {
+    ck_assert_pstr_eq(res_1, res_2);
+    res_1 = strtok(S21_NULL, delim);
+    res_2 = s21_strtok(S21_NULL, delim);
+  }
+
+#test s21_strtok_test1
+char str1[] = "Hello, worl,d!";
+char str2[] = "Hello, worl,d!";
+char delim1[] = ",";
+char* token1 = s21_strtok(str1, delim1);
+char* token2 = strtok(str2, delim1);
+ck_assert(strcmp(token1, token2) == 0);
+token1 = s21_strtok(S21_NULL, delim1);
+token2 = strtok(S21_NULL, delim1);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+
+#test s21_strtok_test2
+char str1[] = ";;a;;b;;c;;";
+char str2[] = ";;a;;b;;c;;";
+char delim2[] = ";";
+char* token1 = s21_strtok(str1, delim2);
+char* token2 = strtok(str2, delim2);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+token1 = s21_strtok(S21_NULL, delim2);
+token2 = strtok(S21_NULL, delim2);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+token1 = s21_strtok(S21_NULL, delim2);
+token2 = strtok(S21_NULL, delim2);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+token1 = s21_strtok(S21_NULL, delim2);
+token2 = strtok(S21_NULL, delim2);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+
+#test s21_strtok_test3
+char str1[] = "nodivider";
+char str2[] = "nodivider";
+char delim3[] = ";";
+char* token1 = s21_strtok(str1, delim3);
+char* token2 = strtok(str2, delim3);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+
+#test s21_strtok_test4
+char str1[] = "Hello, world!";
+char str2[] = "Hello, world!";
+char delim4[] = "";
+char* token1 = s21_strtok(str1, delim4);
+char* token2 = strtok(str2, delim4);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+
+#test s21_strtok_test5
+char str1[] = "Hello, world! aHgf w,,";
+char str2[] = "Hello, world! aHgf w,,";
+char delim5[] = " ,";
+char* token1 = s21_strtok(str1, delim5);
+char* token2 = strtok(str2, delim5);
+token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+while (token1 != NULL && token2 != NULL) {
+    token1 = s21_strtok(NULL, delim5);
+    token2 = strtok(NULL, delim5);
+    token1 && token2 ? ck_assert(strcmp(token1, token2) == 0) : ck_assert(token1 == token2);
+}

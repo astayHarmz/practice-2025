@@ -1,0 +1,47 @@
+#suite s21_insert_test
+
+#test s21_insert_test1
+char *result = s21_insert("Hello, world!", "INSERT", 7);
+ck_assert_str_eq(result, "Hello, INSERTworld!");
+free(result);
+
+#test s21_insert_test2
+char *result = s21_insert("Hello, world!", "START_", 0);
+ck_assert_str_eq(result, "START_Hello, world!");
+free(result);
+
+#test s21_insert_test3
+char *result = s21_insert("Hello, world!", "_END", 13);
+ck_assert_str_eq(result, "Hello, world!_END");
+free(result);
+
+#test s21_insert_test4
+char *result = s21_insert("", "INSERT", 0);
+ck_assert_str_eq(result, "INSERT");
+free(result);
+
+#test s21_insert_test5
+char *result = s21_insert("Hello, world!", "", 5);
+ck_assert_str_eq(result, "Hello, world!");
+free(result);
+
+#test s21_insert_test6
+char *result = s21_insert(NULL, "INSERT", 5);
+ck_assert_ptr_eq(result, NULL);
+
+#test s21_insert_test7
+char *result = s21_insert("Hello, world!", NULL, 5);
+ck_assert_ptr_eq(result, NULL);
+
+#test s21_insert_test8
+char *result = s21_insert("Hello, world!", "OUT", 20);
+ck_assert_ptr_eq(result, NULL);
+
+#test s21_insert_test9
+char *result = s21_insert("123456789", "INSERT", 4);
+ck_assert_str_eq(result, "1234INSERT56789");
+free(result);
+
+
+
+

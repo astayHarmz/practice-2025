@@ -1,0 +1,30 @@
+#suite s21_memcmp_test
+
+#test s21_memcmp_test1
+int str1[6] = {1, 2, 3, 4, 5, 6};
+int str2[6] = {1, 2, 3, 4, 5, 6};
+s21_size_t n = sizeof(int)*6;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result == expected) || (result > 0 && expected > 0));
+
+#test s21_memcmp_test2
+int str1[6] = {1, 8, 3, 4, 5, 6};
+int str2[6] = {1, 2, 3, 4, 5, 6};
+ck_assert_int_eq(memcmp(str1, str2, sizeof(int)*6),s21_memcmp(str1, str2, sizeof(int)*6));
+
+#test s21_memcmp_test3
+int str1[6] = {1, 2, 3, 4, 5, 6};
+int str2[6] = {1, 2, 3, 4, 7, 6};
+ck_assert_int_eq(memcmp(str1, str2, sizeof(int)*6),s21_memcmp(str1, str2, sizeof(int)*6));
+
+#test s21_memcmp_test4
+int str1[4] = {1, 2, 3, 4};
+int str2[6] = {1, 2, 3, 4, 5, 6};
+ck_assert_int_eq(memcmp(str1, str2, sizeof(int)*4),s21_memcmp(str1, str2, sizeof(int)*4));
+
+#test s21_memcmp_test5
+int str1[6] = {1, 2, 3, 4, 5, 6};
+int str2[3] = {1, 2, 3};
+ck_assert_int_eq(memcmp(str1, str2, sizeof(int)*3),s21_memcmp(str1, str2, sizeof(int)*3));
+
